@@ -4,6 +4,17 @@ E-commerce has seen a increadible surge in users over the past few years.Thus fo
 
 **Thus the Goal of this project is to develop an efficient stratergy to find similar products avaliable by utilizing the product's image and text label.**
 
+### Few Examples:
+#### Example 1:
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_1_1.png" alt="example 1.1"> </p>
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_1_2.png" alt="example 1.2"> </p>
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_1_3.png" alt="example 1.3"> </p>
+
+#### Example 2:
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_2_1.png" alt="example 2.1"> </p>
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_2_2.png" alt="example 2.2"> </p>
+<p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_2_3.png" alt="example 2.3"> </p>
+
 
 ### Why don't we just compare image and text directly?
 Each image cannot be compared one by one with the whole image dataset,This approach will be increadibly expensive computationally and time intensive in nature due to sheer size of images.Also process of comparing texts still remains difficult problem 
