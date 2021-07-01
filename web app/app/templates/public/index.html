@@ -1,0 +1,267 @@
+{% extends '/public/templates/public_template.html' %}
+
+{% block title %} Product Matching {% endblock %}
+
+{% block main%}
+<div class="container">
+    <h1 class="home-heading"> Product Matching using Deep Learning</h1>
+    <h5 class="about">Goal of this project is to find similar products available on an e-commerce website using the product's image and label only</h5>
+    <div class="row">
+
+        <form action="/" method="POST" enctype="multipart/form-data">
+
+            <div class="form-group">
+
+                <h4>Upload Image and Text label</h4>
+
+                <label for="image">Product Image:</label>
+                <br>
+                <input type="file" class="custom-file-input" name="image" id="image" accept="image/png, image/jpeg"
+                    onchange="previewFile()">
+                <br>
+                <!-- add /create preview image stuff -->
+                <img src="/static/img/demo_images/image input.png" style="max-width:350px; max-height:350px; " alt="Image preview...">
+                <br>
+
+                <!-- <label class="custom-file-label" for="image">Select image....</label> -->
+
+            </div>
+
+            <div class="form-group">
+                <label for="text">Input label:</label>
+                <input type="text" class="form-control" id="text" name="text" placeholder="Enter the product label">
+            </div>
+
+
+            <br>
+            <!-- <button type="submit" class="btn btn-primary"  id="btnFetch">Submit</button> -->
+            <button type="submit" class="btn btn-danger btn-lg loading buttonload" id="loading"
+                data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Loading...">Submit</button>
+            
+
+
+
+
+    {% if feedback %}
+    <p class="text-danger float right">{{feedback}}.</p>
+    {% endif %}
+
+    {% if allowed %}
+    <p class="text-danger float right">Wrong file type uploaded.</p>
+    {% endif %}
+
+
+
+    <script>
+        function previewFile() {
+            const preview = document.querySelector('img');
+            const file = document.querySelector('input[type=file]').files[0];
+            const reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                // convert image file to base64 string
+                preview.src = reader.result;
+            }, false);
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function fill_form_1() {
+            var txt = document.getElementById("demo_1_label").innerText
+            // var img=document.getElementById("demo1_img")
+            document.getElementById("text").value = txt
+            console.log(document.getElementById('image').files[0].name)
+            // document.getElementById("image")=img
+            // console.log(txt);
+            // console.log(document.getElementById("text").value);
+        }
+    </script>
+
+    <br><br>
+    <h2>Demo Examples</h2>
+    <h5 class="demo about">Data used for training the models was provided by the Indonesian division of the e-commerce business (Shopee), Hence for best performance try out the demo inputs.</h5>
+ 
+    <div class="row">
+        <h3>Demo Input 1</h3>
+        <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/demo_image_3.jpg" class="img-fluid" alt="Demo Image 1" id="demo1_img"
+                style="width: 65%; height: 75%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id='demo_1_label'>Natur Hair Tonic Ginseng dan Aloe Vera 90ml</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_1_button" name='demo_1_button'  value="Try example 1"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+
+    <div class="row">
+        <h3>Demo Input 2</h3>
+        <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/demo_image_perfect_whip.jpg" class="img-fluid" alt="Demo Image 2" id="demo2_img"
+                style="width: 65%; height: 75%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id='demo_2_label'>SENKA Perfect Whip Facial Foam (Shiseido)</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_2_button" name='demo_2_button'  value="Try example 2"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="row">
+        <h3>Demo Input 3</h3>
+        <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/demo_image_lotion_spray.jpg" class="img-fluid" alt="Demo Image 3" id="demo3_img"
+                style="width: 65%; height: 75%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id='demo_3_label'>RATU MAYCREATE MOISTURIZING SPRAY - LOTION SPRAY MAY CREATE 150ML ORIGINAL</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_3_button" name='demo_3_button'  value="Try example 3"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="row">
+        <h3>Demo Input 4</h3>
+        <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/demo_image_2.jpg" class="img-fluid" alt="Demo Image 4" id="demo4_img"
+                style="width: 65%; height: 75%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id='demo_4_label'>Headset / Handsfree U19 macaron / Macaroon Mate Color Hifi Extra Bass</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_4_button" name='demo_4_button'  value="Try example 4"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+
+    <div class="row">
+        <h3>Demo Input 5</h3>
+        <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/demo_image_1.jpg" class="img-fluid" alt="Demo Image 5" id="demo5_img"
+                style="width: 65%; height: 75%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id="demo_5_label">Emina Glossy Stain 01 Autumn Bell</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_5_button" name='demo_5_button'  value="Try example 5"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+    </div>
+
+
+    <div class="row">
+        <h3>Demo Input 6: Random input for fun</h3>
+         <div class="col">
+
+            <h4>Image:</h4>
+            <img src="static/img/demo_images/basketball player.jpg" class="img-fluid" alt="Demo Image 6" id="demo6_img"
+                style="width: 90%; height: 80%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id="demo_6_label">Player wearing a hoodie</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_6_button" name='demo_6_button'  value="Try Random Input"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+        
+        <h5>This input will produce products associated with hoodies.</h5>       
+
+    </div>
+    
+
+
+    <div class="row">
+        <h3>Demo Input 7: Another random input for fun</h3>
+         <div class="col">
+
+            <h4>Image:</h4>
+            <img src="/static/img/demo_images/abe sad.jpg" class="img-fluid" alt="Demo Image 7" id="demo7_img"
+                style="width: 90%; height: 80%;">
+        </div>
+        <div class="col">
+            <div class="row">
+                <h4> Label:</h4>
+                <p id="demo_7_label">Prime minster of Japan wearing a Suit</p>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <input type="submit" class="btn btn-primary" id="demo_7_button" name='demo_7_button'  value="Try Random Input"></button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h5>It will act like an unique product in our e-commerce website and no similar products exists for this input.</h5>       
+    </div>
+
+    <!-- <div class="d-flex justify-content-center">
+        <div class="spinner-border text-primary" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>     -->
+
+
+    </form>
+</div>
+
+</div>
+
+
+
+{% endblock%}
