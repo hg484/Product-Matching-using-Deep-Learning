@@ -2,9 +2,9 @@
 
 ### Deployed Web App : [http://product-matching-webapp.el.r.appspot.com/](http://product-matching-webapp.el.r.appspot.com/)
 
-E-commerce has seen a increadible surge in users over the past few years.Thus for each E-commerce company it is has become increabily important to provide high quality search results and recommendations.With millions of third party sellers operating on their websites ,the process of distinguishing  between products have become increasing difficult
+E-commerce has seen an incredible surge in terms of the users over the past few years. The transition to E-commerce has been further accelerated by the COVID-19 pandemic. Thus for each E-commerce companies, it is has become increasingly important to provide high-quality search results and recommendations. With millions of third-party sellers operating on their websites, the process of distinguishing between products have become increasingly difficult.
 
-**Thus the Goal of this project is to develop an efficient stratergy to find similar products avaliable by utilizing the product's image and text label.**
+**The Goal of this project is to develop an efficient strategy to find similar products available on an e-commerce website by utilizing the product's image and text label.**
 
 ### Few Examples:
 #### Example 1:
@@ -19,43 +19,43 @@ E-commerce has seen a increadible surge in users over the past few years.Thus fo
 
 
 ### Why don't we just compare image and text directly?
-Each image cannot be compared one by one with the whole image dataset,This approach will be increadibly expensive computationally and time intensive in nature due to sheer size of images.Also process of comparing texts still remains difficult problem 
+Each image cannot be compared one by one with the whole image dataset. This approach will be incredibly computational expensive and excessively time-intensive in nature due to the sheer size of images. The process of comparing texts directly also may not give the desired outcomes.
 
-**Hence fintuned pretrained CNN models will be used to generate image embeddings ,and a similar approach is utilized to convert text data into word embeddings using TfidfVectorizer and a Transformer, this approach produced an average F1 score of 0.87 when compared to baseline score of 0.55**
+**Hence a fine-tuned pre-trained CNN models can be used to generate image embeddings and a similar approach is utilized to convert text data into word embeddings using TfidfVectorizer and a Transformer. This approach produces an average F1 score of 0.87 when compared to a baseline score of 0.55.**
 
 
 ### What are Embeddings
-Embeddings are vector representation of data formed by converting high dimesional data (Image, text ,sound files etc) into relatively low dimensional tabular data.They make it easier to perform machine learning on large inputs.
-[More Information](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture#:~:text=An%20embedding%20is%20a%20relatively,like%20sparse%20vectors%20representing%20words.&text=An%20embedding%20can%20be%20learned%20and%20reused%20across%20models.)
+Embeddings are a vector representation of data formed by converting high dimensional data (Image, text, sound files etc.) into relatively low dimensional tabular data. They make it easier to perform machine learning on large inputs.[More Information](https://developers.google.com/machine-learning/crash-course/embeddings/video-lecture#:~:text=An%20embedding%20is%20a%20relatively,like%20sparse%20vectors%20representing%20words.&text=An%20embedding%20can%20be%20learned%20and%20reused%20across%20models.)
 
 This dataset was provided by Shopee ,Shopee is s a Singaporean multinational technology company which focuses mainly on e-commerce.
 
 
 ## Approach Utilized
-## Image based stratergy
-Rather than creating our own model for embedding generation, the best method is to use state of the art image models then finetune them on our dataset.Using these pretrained model without any fintuning will provide an average result(average F1 score of 0.59) whereas the finetuned model performs much better(average F1 score of 0.73).Below image represents the model used generate image embeddings.
+## Image-based strategy
+Rather than creating our model for embedding generation, the best method is to use state of the art image models then fine-tune them on our dataset. Using these pre-trained models without any fine-tuning will provide an average result (average F1 score of 0.59) whereas the fine-tuned model performs much better (average F1 score of 0.73). The image below represents the model used to generate image embeddings.
  <br/>
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/shopee%20Image%20model.png" alt="Image Model"> </p>
  <br/>
 
-The process of model finetuing is borrowed from facial recognition system, [ArcFace Margin Layer](https://arxiv.org/abs/1801.07698) is used instead of a softmax layer in the model during  finetuning process.
+The process of model fine-tuning is borrowed from the facial recognition system, [ArcFace Margin Layer](https://arxiv.org/abs/1801.07698) is used instead of a softmax layer in the model during the fine-tuning process.
+
 
 #### Advantage of ArcFace Layer
-Unlike Softmax,it explicitly optimizes feature embeddings to enforce higher similarity between same class data , this inturn leads to higher quality of embeddings being generated.
+Unlike Softmax, it explicitly optimizes feature embeddings to enforce higher similarity between same class data, this, in turn, leads to a higher quality of embeddings being generated.
 <br />
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/ArcFace%20vs%20Softmax.png" alt="Softmax vs Arcface Margin"> </p>
  <br/>
 
-After embeddings generation, the goal is to generate accurate predicitions using KNearestNeighbour Algorithm and Cosine Similarity. Due to the large number of input data, the sklearn framework cannot be utlized as it leads to **Out of Memory Error**.Hence the [RAPIDS](https://rapids.ai/index.html) library is used, It is a opensource framework used to accelerate data science process by providing ability to execute end-to-end data science and analytics pipelines entirely on GPUs.
+After embeddings generation, the goal is to generate accurate predictions using KNearestNeighbour Algorithm and Cosine Similarity. Due to a large number of input data, the sklearn framework cannot be utilized as it leads to **Out of Memory Error**.Hence the [RAPIDS](https://rapids.ai/index.html)  library is used, it is an open-source framework used to accelerate the data science process by providing the ability to execute end-to-end data science and analytics pipelines entirely on GPUs.
  <br/>
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/Image%20Prediction.png"  alt="Image Predictions"> </p>
  <br/>
 
-Predictions from all the different image models are merged together to generate the final image based predictions.
+Predictions from all the different image models are merged by utilizing either of the prediction approaches to be discussed later in the document to generate the final image based predictions.
 
 
-## Text based stratergy
-Product's text label are converted into word embeddings using two different approaches, TfidfVectorizer and Sentence Transformer are used to encode every text label.
+## Text-based strategy
+The product’s text label is converted into word embeddings using two different approaches, TfidfVectorizer and Sentence Transformer are used to encode every text label.
 <br/>
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/shopee%20text%20model.png" alt="Text Model"> </p>
  <br/>
@@ -70,15 +70,17 @@ Product's text label are converted into word embeddings using two different appr
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/text%20predictions.png"  alt="Text Predictions"> </p>
 
 <br/>
-After embedding generation, both the tfidf and transformer embeddings are merged to into a single set of embeddigs and the final prediction are calculated
+After embedding generation, both the tfidf and transformer embeddings can be used by either of the prediction approaches for final prediction calculation.
+This dataset was provided by Shopee from their indonesian division for a data science competition, Shopee is s a Singaporean multinational technology company that focuses mainly on e-commerce.
 
-## Prediction generation using  Cosine Similarity and KNearestNeigbour Algorithm + Merging Approach
+
+## Prediction generation using Cosine Similarity and KNearestNeigbour Algorithm + Merging Approach
 #### Cosine Similarity
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/cosine_similarity_2.png" alt="cosine similarity"></p>
-Cosine similarity tells us the similarity between two different vectors by calculating the cosine of the angle between two vector and determines whether the two vectors lie in the same directions, to generate the final predictions a minimum threshold distance is decided and all datapoints with a similarity value greater than the threshold value are the required predictions. (Higher the similarity value, Closer the relation between datapoints)
+Cosine similarity tells us the similarity between two different vectors by calculating the cosine of the angle between two vectors and determines whether the two vectors lie in the same directions, to generate the final predictions a minimum threshold distance is decided and all data points with a similarity value greater than the threshold value are the required predictions. (Higher the similarity value, closer the relation between data points).
 
 #### KNearestNeighbour Algorithm
-NearestNeighbour is a common algorithm used find the required number of nearest datapoint according a chosen metric,this allows us to find acurate predictions by deciding a minimum threshold distance and all data with distance less than the decided threshold will be the required predictions .(Lower the distance, Closer the relation between datapoints)
+NearestNeighbour is a common algorithm used to find the required number of nearest data points according to a chosen metric. This allows us to find accurate predictions by deciding a minimum threshold distance. All data points with a distance less than the decided threshold will be the required predictions. (Lower the distance, closer the relation between data points).
  
 #### Merging Approach
 ##### First Approach 
@@ -91,20 +93,20 @@ NearestNeighbour is a common algorithm used find the required number of nearest 
  <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/prediction%20approach%202.png" alt="2nd approach">
 </p>
 
-First Approach performs slightly better than the second approach,a possible reason for this is  1st approach allows the predictions to be developed using both image and text embeddings rather than just merging indepents predictions
+First Approach performs slightly better than the second approach. The 1st approach allows the predictions to be developed using the merged embeddings (both image and text embeddings) whereas the second approach uses merging independents predictions.
  
-Implementations of both the predicition methods are performed using the open source library developed by NIVIDIA called RAPIDS
+Implementations of both the prediction methods are performed using the open-source library developed by NVIDIA called RAPIDS.
 
 ## Results
 ##### Metric Used and how its calculated:
-Metric used to judge the performace is Average F1 Score, for each data entry F1 score is calculated and then mean of all F1 Score are taken.F1 score measures a test's accuracy, it is calculated using precision and recall of the test
+The Metric used to judge the performance is the Average F1 Score. For each data entry, the F1 score is calculated and then the mean of all F1 Scores is taken.F1 score measures a test's accuracy, it is calculated using precision and recall of the test.
 <p align="center"> 
  <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/f1_score.svg" alt="F1 Score">
 </p>
 
 ##### Setting baseline using pHash
 
-Used dataset provides the predictions using [pHash](https://www.phash.org), pHash is a fingerprint of a multimedia file derived from various features,If pHash are 'close' enough ,then datapoint are similar
+The used dataset provides the predictions using using [pHash](https://www.phash.org), pHash is a fingerprint of a multimedia file derived from various features, If pHash are 'close' enough, then datapoint is similar.
 ##### Baseline Average F1 Score:0.55
 ##### Image Only Score(Fintuned CNN):0.72
 ##### Text Only Score: 0.62
