@@ -15,6 +15,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
+from app import download_data
 from app import prepare_model
 
 HEIGHT,WIDTH=256,256
