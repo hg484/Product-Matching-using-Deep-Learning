@@ -17,6 +17,7 @@ E-commerce has seen an incredible surge in terms of the users over the past few 
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_2_2.png" alt="example 2.2"> </p>
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_2_3.png" alt="example 2.3"> </p>
 
+### Structure of Web App
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/product%20matching%20deployemnt%20structure%20v2.png" alt="Web app structure"> </p>
 
 
