@@ -1,6 +1,10 @@
 # Product Matching for E-Commerce using Deep Learning 
 
-### Deployed Web App : [http://product-matching-webapp.el.r.appspot.com/](http://product-matching-webapp.el.r.appspot.com/)
+### Deployment stopped due to GCP charges
+
+Not Working Currently: Deployed Web App : [http://product-matching-webapp.el.r.appspot.com/](http://product-matching-webapp.el.r.appspot.com/)
+### Youtube Link:[https://www.youtube.com/watch?v=uQq281Uzb9k](https://www.youtube.com/watch?v=uQq281Uzb9k)
+
 
 E-commerce has seen an incredible surge in terms of the users over the past few years. The transition to E-commerce has been further accelerated by the COVID-19 pandemic. Thus for each E-commerce companies, it is has become increasingly important to provide high-quality search results and recommendations. With millions of third-party sellers operating on their websites, the process of distinguishing between products have become increasingly difficult.
 
