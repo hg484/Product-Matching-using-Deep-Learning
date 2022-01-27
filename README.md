@@ -10,6 +10,11 @@ E-commerce has seen an incredible surge in terms of the users over the past few 
 
 **The Goal of this project is to develop an efficient strategy to find similar products available on an e-commerce website by utilizing the product's image and text label.**
 
+<p align="center" > 
+  <img src="https://github.com/harsh-miv/Product-Matching-Web-App-Media-FIles/blob/main/productmatching-screen%20share%20higher%20quality.gif" />
+</p>
+
+
 ### Few Examples:
 #### Example 1:
 <p align="center"> <img src="https://github.com/harsh-miv/Product-Matching-using-Deep-Learning/blob/master/Diagrams%20and%20Images/example_1_1.png" alt="example 1.1"> </p>
